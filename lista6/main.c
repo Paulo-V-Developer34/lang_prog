@@ -2,8 +2,38 @@
 #define ex2
 
 #ifdef ex1
-main(){
+int main() {
+    int dia, mes, ano;
 
+    // Entrada da data
+    printf("Digite o dia: ");
+    scanf("%d", &dia);
+    printf("Digite o mes: ");
+    scanf("%d", &mes);
+    printf("Digite o ano: ");
+    scanf("%d", &ano);
+
+    // Ajuste para o algoritmo de Zeller
+    if (mes < 3) {
+        mes += 12;
+        ano -= 1;
+    }
+
+    int k = ano % 100;      // Ano dentro do século
+    int j = ano / 100;      // Século
+
+    // Fórmula de Zeller
+    int h = (dia + 13*(mes + 1)/5 + k + k/4 + j/4 + 5*j) % 7;
+
+    // h = 0 -> sábado, 1 -> domingo, ..., 6 -> sexta
+    char* dias[] = {
+        "Sabado", "Domingo", "Segunda-feira", "Terca-feira",
+        "Quarta-feira", "Quinta-feira", "Sexta-feira"
+    };
+
+    printf("O dia da semana é: %s\n", dias[h]);
+
+    return 0;
 }
 #endif // ex1
 
@@ -102,3 +132,19 @@ int main(){
     return 0;
 }
 #endif // ex2
+
+#ifdef ex3
+int main(){
+    int a = 7; //0000 0111
+    int b = 9; //0000 1001
+    int numerosIguais, reajuste;
+    
+    //verificando numeros iguais
+    numerosIguais = a & b; //0000 0001
+    reajuste = numerosIguais << 1; //0000 0010
+    
+    
+    
+    return 0;
+}
+#endif
