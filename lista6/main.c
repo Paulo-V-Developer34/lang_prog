@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define ex2
+#define ex3
 
 #ifdef ex1
 int main() {
@@ -134,17 +134,88 @@ int main(){
 #endif // ex2
 
 #ifdef ex3
+
+// versão antiga que fiquei com pena de deletar ;-;
+// int main(){
+//     int a = 7; //0000 0111
+//     int b = 9; //0000 1001
+//     int numerosIguais, reajuste, verificacao, resultado, lim=0;
+    
+//     do{
+//         //verificando numeros iguais
+//         verificacao = 0;
+//         numerosIguais = a & b; //0000 0001
+//         reajuste = numerosIguais << 1; //0000 0010
+//         verificacao = reajuste & a;
+//         verificacao += reajuste & b;
+
+//         lim++;
+
+//     }while(verificacao != 0 && lim < 20);
+
+//     resultado = a | b;
+
+//     printf("O resultado da soma entre %d e %d e\' %d",a,b,resultado);
+    
+//     return 0;
+// }
+
 int main(){
-    int a = 7; //0000 0111
-    int b = 9; //0000 1001
-    int numerosIguais, reajuste;
+    int c;
+    int n1, n2;
+    int bit_n1, bit_n2, bit_extra;
+    int novo_numero, novo_bit;
+    char continuar;
+
+    do{
+        novo_numero = 0;
+        novo_bit = 0;
+
+        //pegando os números
+        printf("\nDigite um numero: ");
+        scanf("%d",&n1);
+        printf("\nDigite outro numero: ");
+        scanf("%d",&n2);
+        
+        //irei percorrer todos os bits
+        for(c = 0; c < 32; ++c){
+            //pegando apenas 1 bit na posição c de cada número
+            bit_n1 = n1&(1 << c);
+            bit_n2 = n2&(1 << c);
     
-    //verificando numeros iguais
-    numerosIguais = a & b; //0000 0001
-    reajuste = numerosIguais << 1; //0000 0010
+            //fazendo a verificação dos bits, para resolver problemas como 1111 + 0101 = 1111, utilizando de ajustes para que fique 1111 + 0101 = 10100
+            //o "bit_extra" fará a mediação de 1 bit + 1 bit = 1 bit na próxima casa binária
+            if(bit_n1 & bit_n2){
+                if(bit_extra == 1){
+                    novo_bit = (1 << c);
+                    novo_numero = novo_numero | novo_bit;
+                }
+                bit_extra = 1;
+            }else{
+                if(bit_n1 | bit_n2){
+                    if(bit_extra == 0){
+                        novo_bit = (1 << c);
+                        novo_numero = novo_numero | novo_bit;
+                    }
+                }else{
+                    if(bit_extra == 1){
+                        novo_bit = (1 << c);
+                        novo_numero = novo_numero | novo_bit;
+                        bit_extra = 0;
+                    }
+                }
+                
+            }
+        }
     
-    
-    
+        printf("\nO resultado da soma entre %d e %d e\' %d",n1,n2,novo_numero);
+
+        //perguntando se quer continuar
+        printf("\nQuer continuar fazendo mais somas? ");
+        getchar();
+        scanf("%c", &continuar);
+    }while(continuar == 's' || continuar == 'S');
+
     return 0;
 }
 #endif
