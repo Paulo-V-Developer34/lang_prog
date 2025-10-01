@@ -108,6 +108,7 @@ main()
     }while(continuar == 's' || continuar == 'S');
 }
 #endif
+#ifdef ex2
 int fnFatorial(int numero){
     int contador, fatorial=1;
 
@@ -168,8 +169,6 @@ int main(){
 
     return 0;
 }
-#ifdef ex2
- 
 #endif // ex2
  
 #ifdef ex3
