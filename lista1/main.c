@@ -51,11 +51,11 @@ int main(){
     printf("\n12345678901234567890123456789012345678901234567890123456789012345");
 
     printf("\n%9hd ",a);
-    printf("%9ld ",c);
-    printf("%9d ",b);
-    printf("\n%14f ",d);
-    printf("%14lf ",e);
-    printf("%14c ",f);
+    printf("\t   %9ld ",c);
+    printf("\t      %9d ",b);
+    printf("\n     %14f ",d);
+    printf("\t  %14lf ",e);
+    printf("   %14c ",f);
 
     return 0;
 }
