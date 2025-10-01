@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define ex3
+#define ex2
 
 #ifdef ex1
 int main() {
@@ -91,34 +91,41 @@ void receberDtHoje(){
 // void converterDia(int dia, int mes){
 // }
 
-void calcularIdade(){
-
-    if(mesHoje < mesNasc){
-        if(diaHoje < diaNasc){
-            printf("\nPossibilidade 1");
-            anoIdade = anoHoje - anoNasc - 1;
-            mesIdade = mesHoje - mesNasc;
-            diaIdade = diaHoje - diaNasc;
-        }else{
-            printf("\nPossibilidade 2");
-            anoIdade = anoHoje - anoNasc;
-            mesIdade = mesHoje - mesNasc - 1;
-            diaIdade = diaHoje + diaNasc;
+int diasNoMes(int mes, int ano) {
+    if (mes == 2) { 
+        if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)) {
+            return 29;
+        } else {
+            return 28;
         }
-    }else{
-        if(diaHoje < diaNasc){
-            printf("\nPossibilidade 3");
-            anoIdade = anoHoje - anoNasc - 1;
-            mesIdade = mesHoje - mesNasc + 11;
-            diaIdade = diaNasc - diaHoje + 29;
-        }else{
-            printf("\nPossibilidade 4");
-            anoIdade = anoHoje - anoNasc;
-            mesIdade = mesHoje - mesNasc;
-            diaIdade = diaHoje - diaNasc;
-        }
+    } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) { 
+        return 30;
+    } else { 
+        return 31;
     }
 }
+
+void calcularIdade() {
+    
+    int anoTemp = anoHoje;
+    int mesTemp = mesHoje;
+    int diaTemp = diaHoje;
+
+    if (diaTemp < diaNasc) {
+        mesTemp--; 
+        
+        diaTemp += diasNoMes(mesTemp, anoTemp);
+    }
+    diaIdade = diaTemp - diaNasc;
+
+    if (mesTemp < mesNasc) {
+        anoTemp--; 
+        mesTemp += 12; 
+    }
+    mesIdade = mesTemp - mesNasc;
+    anoIdade = anoTemp - anoNasc;
+}
+
 
 int main(){
     do{
@@ -215,6 +222,96 @@ int main(){
         getchar();
         scanf("%c", &continuar);
     }while(continuar == 's' || continuar == 'S');
+
+    return 0;
+}
+#endif
+
+#ifdef ex4
+int main() {
+    int n1, n2;
+    
+    int soma, subtracao, multiplicacao;
+    float divisao;
+
+    printf("Digite o primeiro número inteiro: ");
+    scanf("%d", &n1);
+
+    printf("Digite o segundo número inteiro: ");
+    scanf("%d", &n2);
+
+
+    soma = n1 + n2;
+
+    subtracao = n1 - n2;
+
+    multiplicacao = n1 * n2;
+
+    if (n2 != 0) {
+        divisao = (float)n1 / n2;
+    } else {
+        printf("\nDivisao por zero gera um erro, por isso nao podera ser mostrada");
+        divisao = 0.0; 
+    }
+
+    printf("Calculos com os numeros %d e %d", n1, n2);
+
+    printf("\nSoma:          %d + %d = %d", n1, n2, soma);
+    printf("\nSubtração:     %d - %d = %d", n1, n2, subtracao);
+    printf("\nMultiplicação: %d * %d = %d", n1, n2, multiplicacao);
+    
+    if (n2 != 0) {
+        printf("\nDivisão:       %d / %d = %.2f", n1, n2, divisao);
+    } else {
+        printf("\nDivisão:       Impossível (Divisão por zero)\n");
+    }
+
+    return 0;
+}
+#endif
+
+#ifdef ex5
+int main() {
+    int n1, n2;
+    
+    int soma, subtracao, multiplicacao;
+    float divisao;
+
+    printf("Digite o primeiro número inteiro: ");
+    scanf("%d", &n1);
+
+    printf("Digite o segundo número inteiro: ");
+    scanf("%d", &n2);
+
+
+    soma = n1; 
+    soma += n2;
+
+    subtracao = n1;
+    subtracao -= n2;
+
+    multiplicacao = n1;
+    multiplicacao *= n2;
+
+    if (n2 != 0) {
+        divisao = (float)n1;
+        divisao /= n2;
+    } else {
+        printf("\nDivisao por zero gera um erro, por isso nao podera ser mostrada");
+        divisao = 0.0; 
+    }
+
+    printf("Calculos com os numeros %d e %d", n1, n2);
+
+    printf("\nSoma:          %d + %d = %d", n1, n2, soma);
+    printf("\nSubtração:     %d - %d = %d", n1, n2, subtracao);
+    printf("\nMultiplicação: %d * %d = %d", n1, n2, multiplicacao);
+    
+    if (n2 != 0) {
+        printf("\nDivisão:       %d / %d = %.2f", n1, n2, divisao);
+    } else {
+        printf("\nDivisão:       Impossível (Divisão por zero)\n");
+    }
 
     return 0;
 }
