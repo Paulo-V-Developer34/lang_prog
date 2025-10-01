@@ -53,3 +53,8 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# ignorando arquivos compilados e bibliotecas
+
+main
+.dat
