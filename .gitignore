@@ -57,4 +57,4 @@ dkms.conf
 # ignorando arquivos compilados e bibliotecas
 
 main
-.dat
+*.dat
