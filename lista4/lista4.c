@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define ex1
+#define ex3
 
 #ifdef ex1
 int numeros[10], indPar[5], indImp[5];
@@ -59,7 +59,7 @@ int main()
 }
 #endif
 
-#ifdef ex2
+#ifdef ex3
 int numeros[10], indPar[10], indImp[10];
 int impPosition=0, parPosition=0;
 
