@@ -4,34 +4,40 @@
 #ifdef ex1
 int main() {
     int dia, mes, ano;
+    char continuar;
 
-    // Entrada da data
-    printf("Digite o dia: ");
-    scanf("%d", &dia);
-    printf("Digite o mes: ");
-    scanf("%d", &mes);
-    printf("Digite o ano: ");
-    scanf("%d", &ano);
-
-    // Ajuste para o algoritmo de Zeller
-    if (mes < 3) {
-        mes += 12;
-        ano -= 1;
-    }
-
-    int k = ano % 100;      // Ano dentro do século
-    int j = ano / 100;      // Século
-
-    // Fórmula de Zeller
-    int h = (dia + 13*(mes + 1)/5 + k + k/4 + j/4 + 5*j) % 7;
-
-    // h = 0 -> sábado, 1 -> domingo, ..., 6 -> sexta
-    char* dias[] = {
-        "Sabado", "Domingo", "Segunda-feira", "Terca-feira",
-        "Quarta-feira", "Quinta-feira", "Sexta-feira"
-    };
-
-    printf("O dia da semana é: %s\n", dias[h]);
+    do{
+        // Entrada da data
+        printf("Digite o dia: ");
+        scanf("%d", &dia);
+        printf("Digite o mes: ");
+        scanf("%d", &mes);
+        printf("Digite o ano: ");
+        scanf("%d", &ano);
+    
+        // Ajuste para o algoritmo de Zeller
+        if (mes < 3) {
+            mes += 12;
+            ano -= 1;
+        }
+    
+        int k = ano % 100;      // Ano dentro do século
+        int j = ano / 100;      // Século
+    
+        // Fórmula de Zeller
+        int h = (dia + 13*(mes + 1)/5 + k + k/4 + j/4 + 5*j) % 7;
+    
+        // h = 0 -> sábado, 1 -> domingo, ..., 6 -> sexta
+        char* dias[] = {
+            "Sabado", "Domingo", "Segunda-feira", "Terca-feira",
+            "Quarta-feira", "Quinta-feira", "Sexta-feira"
+        };
+    
+        printf("O dia da semana é: %s\n", dias[h]);
+        printf("\nQuer executar o programa novamente (digite \"s\" se sim)? ");
+        getchar();
+        scanf("%c", &continuar);
+    }while(continuar == 's' || continuar == 'S');
 
     return 0;
 }
@@ -42,7 +48,7 @@ int diaHoje, mesHoje, anoHoje;
 int diaNasc, mesNasc, anoNasc;
 int diaIdade, mesIdade, anoIdade;
 int diaAux, mesAux, anoAux;
-int dataDeHojeFoiColocada = 0;
+int dataDeHojeFoiColocada = 0;//para não ter que ficar colocando a data de hoje várias vezes
 
 void receberDtNascimento(){
     do{
@@ -128,13 +134,18 @@ void calcularIdade() {
 
 
 int main(){
+    char continuar;
     do{
         receberDtHoje();
         receberDtNascimento();
         calcularIdade();
-
+    
         printf("\nSua idade e\': %d anos, %d meses e %d dias",anoIdade, mesIdade, diaIdade);
-    }while(1);
+
+        printf("\nQuer executar o programa novamente (digite \"s\" se sim)? ");
+        getchar();
+        scanf("%c", &continuar);
+    }while(continuar == 's' || continuar == 'S');
 
     return 0;
 }
@@ -233,38 +244,44 @@ int main() {
     
     int soma, subtracao, multiplicacao;
     float divisao;
-
-    printf("Digite o primeiro número inteiro: ");
-    scanf("%d", &n1);
-
-    printf("Digite o segundo número inteiro: ");
-    scanf("%d", &n2);
-
-
-    soma = n1 + n2;
-
-    subtracao = n1 - n2;
-
-    multiplicacao = n1 * n2;
-
-    if (n2 != 0) {
-        divisao = (float)n1 / n2;
-    } else {
-        printf("\nDivisao por zero gera um erro, por isso nao podera ser mostrada");
-        divisao = 0.0; 
-    }
-
-    printf("Calculos com os numeros %d e %d", n1, n2);
-
-    printf("\nSoma:          %d + %d = %d", n1, n2, soma);
-    printf("\nSubtração:     %d - %d = %d", n1, n2, subtracao);
-    printf("\nMultiplicação: %d * %d = %d", n1, n2, multiplicacao);
+    char continuar;
+    do{
+        printf("Digite o primeiro número inteiro: ");
+        scanf("%d", &n1);
     
-    if (n2 != 0) {
-        printf("\nDivisão:       %d / %d = %.2f", n1, n2, divisao);
-    } else {
-        printf("\nDivisão:       Impossível (Divisão por zero)\n");
-    }
+        printf("Digite o segundo número inteiro: ");
+        scanf("%d", &n2);
+    
+    
+        soma = n1 + n2;
+    
+        subtracao = n1 - n2;
+    
+        multiplicacao = n1 * n2;
+    
+        if (n2 != 0) {
+            divisao = (float)n1 / n2;
+        } else {
+            printf("\nDivisao por zero gera um erro, por isso nao podera ser mostrada");
+            divisao = 0.0; 
+        }
+    
+        printf("Calculos com os numeros %d e %d", n1, n2);
+    
+        printf("\nSoma:          %d + %d = %d", n1, n2, soma);
+        printf("\nSubtração:     %d - %d = %d", n1, n2, subtracao);
+        printf("\nMultiplicação: %d * %d = %d", n1, n2, multiplicacao);
+        
+        if (n2 != 0) {
+            printf("\nDivisão:       %d / %d = %.2f", n1, n2, divisao);
+        } else {
+            printf("\nDivisão:       Impossível (Divisão por zero)\n");
+        }
+        printf("\nQuer executar o programa novamente (digite \"s\" se sim)? ");
+        getchar();
+        scanf("%c", &continuar);
+    }while(continuar == 's' || continuar == 'S');
+
 
     return 0;
 }
@@ -276,42 +293,49 @@ int main() {
     
     int soma, subtracao, multiplicacao;
     float divisao;
+    char continuar;
 
-    printf("Digite o primeiro número inteiro: ");
-    scanf("%d", &n1);
-
-    printf("Digite o segundo número inteiro: ");
-    scanf("%d", &n2);
-
-
-    soma = n1; 
-    soma += n2;
-
-    subtracao = n1;
-    subtracao -= n2;
-
-    multiplicacao = n1;
-    multiplicacao *= n2;
-
-    if (n2 != 0) {
-        divisao = (float)n1;
-        divisao /= n2;
-    } else {
-        printf("\nDivisao por zero gera um erro, por isso nao podera ser mostrada");
-        divisao = 0.0; 
-    }
-
-    printf("Calculos com os numeros %d e %d", n1, n2);
-
-    printf("\nSoma:          %d + %d = %d", n1, n2, soma);
-    printf("\nSubtração:     %d - %d = %d", n1, n2, subtracao);
-    printf("\nMultiplicação: %d * %d = %d", n1, n2, multiplicacao);
+    do{
+        printf("Digite o primeiro número inteiro: ");
+        scanf("%d", &n1);
     
-    if (n2 != 0) {
-        printf("\nDivisão:       %d / %d = %.2f", n1, n2, divisao);
-    } else {
-        printf("\nDivisão:       Impossível (Divisão por zero)\n");
-    }
+        printf("Digite o segundo número inteiro: ");
+        scanf("%d", &n2);
+    
+    
+        soma = n1; 
+        soma += n2;
+    
+        subtracao = n1;
+        subtracao -= n2;
+    
+        multiplicacao = n1;
+        multiplicacao *= n2;
+    
+        if (n2 != 0) {
+            divisao = (float)n1;
+            divisao /= n2;
+        } else {
+            printf("\nDivisao por zero gera um erro, por isso nao podera ser mostrada");
+            divisao = 0.0; 
+        }
+    
+        printf("Calculos com os numeros %d e %d", n1, n2);
+    
+        printf("\nSoma:          %d + %d = %d", n1, n2, soma);
+        printf("\nSubtração:     %d - %d = %d", n1, n2, subtracao);
+        printf("\nMultiplicação: %d * %d = %d", n1, n2, multiplicacao);
+        
+        if (n2 != 0) {
+            printf("\nDivisão:       %d / %d = %.2f", n1, n2, divisao);
+        } else {
+            printf("\nDivisão:       Impossível (Divisão por zero)\n");
+        }
+        printf("\nQuer executar o programa novamente (digite \"s\" se sim)? ");
+        getchar();
+        scanf("%c", &continuar);
+    }while(continuar == 's' || continuar == 'S');
+
 
     return 0;
 }

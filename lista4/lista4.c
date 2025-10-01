@@ -52,9 +52,16 @@ void mostrar(){
 
 int main()
 {
-    guardar();
-    separar();
-    mostrar();
+    char continuar;
+    do{
+        guardar();
+        separar();
+        mostrar();
+
+        printf("\nQuer executar o programa novamente (digite \"s\" se sim)? ");
+        getchar();
+        scanf("%c", &continuar);
+    }while(continuar == 's' || continuar == 'S');
     return 0;
 }
 #endif
@@ -114,9 +121,15 @@ void mostrar(){
 
 int main()
 {
-    guardar();
-    separar();
-    mostrar();
+    char continuar;
+    do{
+        guardar();
+        separar();
+        mostrar();
+        printf("\nQuer executar o programa novamente (digite \"s\" se sim)? ");
+        getchar();
+        scanf("%c", &continuar);
+    }while(continuar == 's' || continuar == 'S');
     return 0;
 }
 #endif
