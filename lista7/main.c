@@ -17,7 +17,7 @@ int calcularDiferenca(){
 
 data calendario[2];
 int main(){
-    printf("Este programa calcula a diferenca entre 2 datas")
+    printf("Este programa calcula a diferenca entre 2 datas");
     printf("\nEntre com a primeira data: \n");
     printf("Dia: ");
     scanf("%d",&calendario[0].dia);
