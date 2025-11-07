@@ -52,30 +52,7 @@ OBS.: As variaveis sao locais na funcao main().
 #include <stdio.h>
 #define ex1
 
-#ifdef ex1
-int main(){
-
-    short int a = 0;
-    int b = 0;
-    long int c = 0;
-    float d = 0;
-    double e = 0;
-    char f;
-
-    printf("\ndigite um numero pequeno");
-    scanf("%hd",&a);
-    printf("\ndigite um numero");
-    scanf("%d",&b);
-    printf("\ndigite um numero grande");
-    scanf("%ld",&c);
-    printf("\ndigite um numero de ponto flutuante");
-    scanf("%f",&d);
-    printf("\ndigite um numero de ponto flutuante maior");
-    scanf("%lf",&e);
-    getchar();
-    printf("\ndigite uma letra");
-    scanf("%c",&f);
-
+void gabarito(){
     printf("        10");
     printf("        20");
     printf("        30");
@@ -83,13 +60,67 @@ int main(){
     printf("        50");
     printf("        60");
     printf("\n12345678901234567890123456789012345678901234567890123456789012345");
+}
 
-    printf("\n%9hd ",a);
-    printf("\t   %9ld ",c);
-    printf("\t      %9d ",b);
-    printf("\n     %14f ",d);
-    printf("\t  %14lf ",e);
-    printf("   %14c ",f);
+
+
+#ifdef ex1
+int main(){
+
+    short int   a, *pa;
+    int         b, *pb;
+    long int    c, *pc;
+    float       d, *pd;
+    double      e, *pe;
+    char        f, *pf;
+
+    pa = &a;
+    pb = &b;
+    pc = &c;
+    pd = &d;
+    pe = &e;
+    pf = &f;
+
+    int resp = 1;
+    
+    while(resp == 1)
+    {
+        printf("\ndigite um numero pequeno");
+        scanf("%hd",pa);
+        printf("\ndigite um numero");
+        scanf("%d",pb);
+        printf("\ndigite um numero grande");
+        scanf("%ld",pc);
+        printf("\ndigite um numero de ponto flutuante");
+        scanf("%f",pd);
+        printf("\ndigite um numero de ponto flutuante maior");
+        scanf("%lf",pe);
+        getchar();
+        printf("\ndigite uma letra");
+        scanf("%c",pf);
+    
+        gabarito();
+    
+        printf("\n%9hd ",*pa);
+        printf("\t   %9ld ",*pc);
+        printf("\t      %9d ",*pb);
+        printf("\n     %14f ",*pd);
+        printf("\t  %14lf ",*pe);
+        printf("   %14c ",*pf);
+
+        do{
+            printf("\nQuer continuar o programa?\nDigite (1) para sim e (2) para nao:\n");
+            scanf("%d", &resp);
+
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+
+            if(resp != 1 && resp != 2)
+            {
+                printf("Erro digite 1 ou 2 como resposta!\n");
+            }
+        }while(resp != 1 && resp != 2);
+    }
 
     return 0;
 }
