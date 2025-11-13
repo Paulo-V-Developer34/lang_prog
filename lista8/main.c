@@ -50,7 +50,7 @@ OBS.: As variaveis sao locais na funcao main().
 */
 
 #include <stdio.h>
-#define ex1
+#define ex2
 
 void gabarito(){
     printf("        10");
@@ -107,6 +107,55 @@ int main(){
         printf("\n     %14f ",*pd);
         printf("\t  %14lf ",*pe);
         printf("   %14c ",*pf);
+
+        do{
+            printf("\nQuer continuar o programa?\nDigite (1) para sim e (2) para nao:\n");
+            scanf("%d", &resp);
+
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+
+            if(resp != 1 && resp != 2)
+            {
+                printf("Erro digite 1 ou 2 como resposta!\n");
+            }
+        }while(resp != 1 && resp != 2);
+    }
+
+    return 0;
+}
+#endif
+
+#ifdef ex2
+
+int fim, numero, *pNumero, qtddNumeros;
+float acumulador;
+pNumero = &numero;
+
+int main(){
+
+    int resp = 1;
+    
+    while(resp == 1)
+    {
+        fim = 0;
+        acumulador = 0;
+        qtddNumeros = 0;
+
+        while (fim == 0)
+        {
+            printf("\nDigite um numero: ");
+            scanf("%d",pNumero);
+    
+            if(*pNumero < 0){
+                fim = 1;
+            }else{
+                qtddNumeros++;
+                acumulador += *pNumero;
+            }
+        }
+
+        printf("A media dos numeros digitados e aproximadamente: %f",acumulador / qtddNumeros);
 
         do{
             printf("\nQuer continuar o programa?\nDigite (1) para sim e (2) para nao:\n");
