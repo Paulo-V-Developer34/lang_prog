@@ -50,8 +50,9 @@ OBS.: As variaveis sao locais na funcao main().
 */
 
 #include <stdio.h>
-#define ex2
+#define ex3
 
+#ifdef ex1
 void gabarito(){
     printf("        10");
     printf("        20");
@@ -62,9 +63,6 @@ void gabarito(){
     printf("\n12345678901234567890123456789012345678901234567890123456789012345");
 }
 
-
-
-#ifdef ex1
 int main(){
 
     short int   a, *pa;
@@ -174,3 +172,60 @@ int main(){
     return 0;
 }
 #endif
+
+#ifdef ex3
+char p1[11], p2[11];
+
+int comparacao(){
+    int count, iguais = 1;
+    char *ptrP1 = p1, *ptrP2 = p2;
+    for(count = 0; count < 10; count++){
+        if(*(ptrP1 + count) != *(ptrP2 + count)){
+            iguais = 0;
+        }
+    }
+    return iguais;
+}
+
+int main(){
+
+
+    int resp = 0;
+    int igual = 0;
+
+    while(resp == 1)
+    {
+        printf("\ndigite uma palavra de 10 letras");
+        fflush(stdin);
+        gets(p1);
+
+        printf("\ndigite outra palavra de 10 letras");
+        fflush(stdin);
+        gets(p2);
+
+        igual = comparacao();
+
+        if(igual){
+            printf("As palavras sao iguais");
+        } else {
+            printf("As palavras sao diferentes");
+        }
+        
+        do{
+            printf("\nQuer continuar o programa?\nDigite (1) para sim e (2) para nao:\n");
+            scanf("%d", &resp);
+
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+
+            if(resp != 1 && resp != 2)
+            {
+                printf("Erro digite 1 ou 2 como resposta!\n");
+            }
+        }while(resp != 1 && resp != 2);
+    }
+
+    return 0;
+}
+#endif
+
