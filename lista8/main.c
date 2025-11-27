@@ -190,7 +190,7 @@ int comparacao(){
 int main(){
 
 
-    int resp = 0;
+    int resp = 1;
     int igual = 0;
 
     while(resp == 1)
@@ -229,3 +229,49 @@ int main(){
 }
 #endif
 
+#ifdef ex4
+char letras[11] = {b,d,f,h,j,k,m,o,q,s,u,w,y};
+
+int pesquisa(char *letra){
+    int count;
+    for(count = 0; count < 10; count++)
+}
+
+int main(){
+
+    int resp = 1;
+    int igual = 0;
+    char letra, *ptrLetra;
+    ptrLetra = &letra;
+
+    while(resp == 1)
+    {
+        
+        printf("\ndigite uma letra");
+        scanf("%c",&ptrLetra);
+
+        igual = comparacao();
+
+        if(igual){
+            printf("As palavras sao iguais");
+        } else {
+            printf("As palavras sao diferentes");
+        }
+        
+        do{
+            printf("\nQuer continuar o programa?\nDigite (1) para sim e (2) para nao:\n");
+            scanf("%d", &resp);
+
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+
+            if(resp != 1 && resp != 2)
+            {
+                printf("Erro digite 1 ou 2 como resposta!\n");
+            }
+        }while(resp != 1 && resp != 2);
+    }
+
+    return 0;
+}
+#endif
