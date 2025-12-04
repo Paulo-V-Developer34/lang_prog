@@ -50,7 +50,7 @@ OBS.: As variaveis sao locais na funcao main().
 */
 
 #include <stdio.h>
-#define ex3
+#define ex6
 
 #ifdef ex1
 void gabarito(){
@@ -230,11 +230,16 @@ int main(){
 #endif
 
 #ifdef ex4
-char letras[11] = {b,d,f,h,j,k,m,o,q,s,u,w,y};
+char letras[14] = {'b','d','f','h','j','k','m','o','q','s','u','w','y'};
 
 int pesquisa(char *letra){
-    int count;
-    for(count = 0; count < 10; count++)
+    int count, igual;
+    for(count = 0; count < 10; count++){
+        if(letras[count] == *letra){
+            igual = 1;
+        }
+    }
+    return igual;
 }
 
 int main(){
@@ -246,18 +251,194 @@ int main(){
 
     while(resp == 1)
     {
-        
-        printf("\ndigite uma letra");
-        scanf("%c",&ptrLetra);
+        igual = 0;
 
-        igual = comparacao();
+        printf("\ndigite uma letra ");
+        scanf("%c",ptrLetra);
+
+        igual = pesquisa(ptrLetra);
 
         if(igual){
-            printf("As palavras sao iguais");
+            printf("A letra %c está na lista", *ptrLetra);
         } else {
-            printf("As palavras sao diferentes");
+            printf("A letra %c não está na lista", *ptrLetra);
         }
         
+        do{
+            printf("\nQuer continuar o programa?\nDigite (1) para sim e (2) para nao:\n");
+            scanf("%d", &resp);
+
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+
+            if(resp != 1 && resp != 2)
+            {
+                printf("Erro digite 1 ou 2 como resposta!\n");
+            }
+        }while(resp != 1 && resp != 2);
+    }
+
+    return 0;
+}
+#endif
+
+#ifdef ex5
+// definição da estrutura
+struct Cadastro {
+    char nome[50];
+    char end[50];
+    char cidade[30];
+    char estado[20];
+    char cep[15];
+};
+
+// vetor global de 4 elementos
+struct Cadastro registros[4];
+
+// função para receber dados via teclado usando ponteiros
+void receberDados(struct Cadastro *p) {
+    for(int i = 0; i < 4; i++) {
+        printf("\n--- Registro %d ---\n", i+1);
+
+        printf("Digite o nome: ");
+        gets(p[i].nome);
+
+        printf("Digite o endereço: ");
+        gets(p[i].end);
+
+        printf("Digite a cidade: ");
+        gets(p[i].cidade);
+
+        printf("Digite o estado: ");
+        gets(p[i].estado);
+
+        printf("Digite o CEP: ");
+        gets(p[i].cep);
+    }
+}
+
+// função para imprimir os dados usando ponteiros
+void imprimirDados(struct Cadastro *p) {
+    printf("\n===== Dados cadastrados =====\n");
+    for(int i = 0; i < 4; i++) {
+        printf("\n--- Registro %d ---\n", i+1);
+        printf("Nome: ");
+        puts(p[i].nome);
+        printf("Endereço: ");
+        puts(p[i].end);
+        printf("Cidade: ");
+        puts(p[i].cidade);
+        printf("Estado: ");
+        puts(p[i].estado);
+        printf("CEP: ");
+        puts(p[i].cep);
+    }
+}
+
+int main(){
+    int resp = 1;
+    
+    while(resp == 1)
+    {
+        receberDados(registros);
+        imprimirDados(registros);
+
+        do{
+            printf("\nQuer continuar o programa?\nDigite (1) para sim e (2) para nao:\n");
+            scanf("%d", &resp);
+
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+
+            if(resp != 1 && resp != 2)
+            {
+                printf("Erro digite 1 ou 2 como resposta!\n");
+            }
+        }while(resp != 1 && resp != 2);
+    }
+
+    return 0;
+}
+#endif
+
+#ifdef ex6
+
+struct Data
+{
+    int dia;
+    int mes;
+    int ano;
+};
+
+struct Data datas[2];
+
+// Verifica se um ano é bissexto
+int verificarBissexto(int ano) {
+    return (ano % 400 == 0) || (ano % 4 == 0 && ano % 100 != 0);
+}
+
+// Retorna número de dias em um mês
+int diasNoMes(int mes, int ano) {
+    int diasPorMes[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+    if (mes == 2 && verificarBissexto(ano)) {
+        return 29;
+    }
+    return diasPorMes[mes - 1];
+}
+
+// Converte uma data em "dias absolutos" desde 01/01/0001
+int qtddDias(struct Data *data) {
+    int total = 0;
+
+    // Soma dias dos anos completos anteriores
+    for (int i = 1; i < data->ano; i++) {
+        total += verificarBissexto(i) ? 366 : 365;
+    }
+
+    // Soma dias dos meses completos anteriores no ano atual
+    for (int i = 1; i < data->mes; i++) {
+        total += diasNoMes(i, data->ano);
+    }
+
+    // Soma os dias do mês atual
+    total += data->dia;
+
+    return total;
+}
+
+int main(){
+    struct Data *ptrDatas;
+    ptrDatas = &datas[0];
+
+    int resp = 1, dataDiferenca;
+    
+    while(resp == 1)
+    {
+        dataDiferenca = 0;
+
+        printf("\nDigite uma data");
+        printf("\nDia: ");
+        scanf("%d",&ptrDatas[0].dia);
+        printf("\nMes: ");
+        scanf("%d",&ptrDatas[0].mes);
+        printf("\nAno: ");
+        scanf("%d",&ptrDatas[0].ano);
+
+        printf("\nDigite outra data");
+        printf("\nDia: ");
+        scanf("%d",&ptrDatas[1].dia);
+        printf("\nMes: ");
+        scanf("%d",&ptrDatas[1].mes);
+        printf("\nAno: ");
+        scanf("%d",&ptrDatas[1].ano);
+
+        dataDiferenca = diasDesdeOrigem(&ptrDatas[0])-diasDesdeOrigem(&ptrDatas[1]);
+        if(dataDiferenca < 0){
+            dataDiferenca = dataDiferenca * -1;
+        }
+
+        printf("\nA diferença entre a primeira data e a segunda data e\' %d dias",dataDiferenca);
+
         do{
             printf("\nQuer continuar o programa?\nDigite (1) para sim e (2) para nao:\n");
             scanf("%d", &resp);
